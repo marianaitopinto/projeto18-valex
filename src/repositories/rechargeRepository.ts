@@ -1,4 +1,4 @@
-import { connection } from "../database.js";
+import { connection } from "../config/db"
 
 export interface Recharge {
   id: number;
