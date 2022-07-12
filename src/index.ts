@@ -5,7 +5,6 @@ import "dotenv/config";
 import routers from "./routers/index";
 import handleError from "./middlewares/errorHandlingMiddleware";
 
-
 const app = express();
 
 app.use(express.json());

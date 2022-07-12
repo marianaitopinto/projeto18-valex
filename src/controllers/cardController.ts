@@ -1,31 +1,45 @@
 import { Request, Response } from "express";
-import * as cardRepository from "../repositories/cardRepository"
-import * as cardService from "../services/cardServices"
+import * as cardRepository from "../repositories/cardRepository";
+import * as cardService from "../services/cardServices";
 
 export async function createCard(req: Request, res: Response) {
-    const { employeeId, type }: { employeeId: number; type: cardRepository.TransactionTypes; } = req.body;
+  const {
+    employeeId,
+    type,
+  }: { employeeId: number; type: cardRepository.TransactionTypes } = req.body;
 
-    const newCard = await cardService.createCard(employeeId, type);
+  const newCard = await cardService.createCard(employeeId, type);
 
-    res.status(201).send("Card created");
+  res.status(201).send("Card created");
 }
 
 export async function activateCard(req: Request, res: Response) {
-    const { id } = req.params;
-    const { securityCode, password } : { securityCode: string; password: string }  = req.body;
-    const cardId = parseInt(id)
-    console.log(id)
+  const { id } = req.params;
+  const { securityCode, password }: { securityCode: string; password: string } =
+    req.body;
+  const cardId = parseInt(id);
+  console.log(id);
 
-    await cardService.activateCard(cardId, securityCode, password);
+  await cardService.activateCard(cardId, securityCode, password);
 
-    res.sendStatus(201);
+  res.sendStatus(201);
 }
 
 export async function getBalance(req: Request, res: Response) {
-    const { id } = req.params;
-    const cardId = parseInt(id)
+  const { id } = req.params;
+  const cardId = parseInt(id);
 
-    const balance = await cardService.getBalanceCard(cardId)
+  const balance = await cardService.getBalanceCard(cardId);
 
-    res.send(balance)
+  res.send(balance);
+}
+
+export async function blockCard(req: Request, res: Response) {
+  const { id } = req.params;
+  const { password } = req.body;
+  const cardId = parseInt(id);
+
+  await cardService.blockCard(cardId, password);
+
+  res.sendStatus(200);
 }
