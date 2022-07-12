@@ -8,7 +8,7 @@ export async function createCard(req: Request, res: Response) {
     type,
   }: { employeeId: number; type: cardRepository.TransactionTypes } = req.body;
 
-  const newCard = await cardService.createCard(employeeId, type);
+  await cardService.createCard(employeeId, type);
 
   res.status(201).send("Card created");
 }

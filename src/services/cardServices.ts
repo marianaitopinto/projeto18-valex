@@ -21,6 +21,7 @@ export async function createCard(
     type,
     employeeId
   );
+
   if (employeeCardType)
     throw new AppError("The employee already has a card of the same type", 409);
 
