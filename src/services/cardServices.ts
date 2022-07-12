@@ -96,7 +96,19 @@ export async function blockCard(cardId: number, password: string) {
   //VERIFICAR SE ESTÁ EXPIRADO - ARRUMAR FUNÇÃO
 
   await cardUtil.checkPassword(password, cardData.password);
-  console.log("passei na senha");
 
   await cardRepository.update(cardId, { isBlocked: true });
+}
+
+export async function unblockCard(cardId: number, password: string) {
+  const cardData = await cardUtil.checkCardExist(cardId);
+
+  if (!cardData.isBlocked)
+    throw new AppError("The card is already unblocked", 401);
+
+  //VERIFICAR SE ESTÁ EXPIRADO - ARRUMAR FUNÇÃO
+
+  await cardUtil.checkPassword(password, cardData.password);
+
+  await cardRepository.update(cardId, { isBlocked: false });
 }
