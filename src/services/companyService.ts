@@ -1,10 +1,10 @@
 import * as companyRepository from "../repositories/companyRepository";
-import { AppError } from "../errors/appError"
+import { AppError } from "../errors/appError";
 
 export async function validateApiKey(apiKey: string) {
-    const companyInfo = await companyRepository.findByApiKey(apiKey)
-    
-    if (!companyInfo) throw new AppError("API key was not found", 404);
+  const companyInfo = await companyRepository.findByApiKey(apiKey);
 
-    return companyInfo;
+  if (!companyInfo) throw new AppError("API key was not found", 404);
+
+  return companyInfo;
 }

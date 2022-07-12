@@ -10,12 +10,12 @@ export function createCardName(name: string) {
   let cardName: string = nameArray[0];
 
   for (let i = 1; i < nameArray.length - 1; i++) {
-    if (nameArray[i].length >2) {
-      cardName += ` ${nameArray[i][0]}`
+    if (nameArray[i].length > 2) {
+      cardName += ` ${nameArray[i][0]}`;
     }
   }
 
-  cardName += ` ${nameArray[nameArray.length -1]}`
+  cardName += ` ${nameArray[nameArray.length - 1]}`;
 
   return cardName;
 }
@@ -63,8 +63,6 @@ export function getBalance(recharges: any, payments: any) {
 }
 
 export function checkPassword(password: string, encryptPassword: any) {
-  console.log(password);
-  console.log(encryptPassword);
   const check = bcrypt.compareSync(password, encryptPassword);
 
   if (!check) throw new AppError("Unauthorized", 401);

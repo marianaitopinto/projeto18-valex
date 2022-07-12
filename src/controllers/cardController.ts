@@ -18,7 +18,6 @@ export async function activateCard(req: Request, res: Response) {
   const { securityCode, password }: { securityCode: string; password: string } =
     req.body;
   const cardId = parseInt(id);
-  console.log(id);
 
   await cardService.activateCard(cardId, securityCode, password);
 

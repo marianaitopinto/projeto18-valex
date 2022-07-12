@@ -15,6 +15,5 @@ export default async function validateApi(
   const company = await companyService.validateApiKey(apiKey);
 
   res.locals.company = company;
-  console.log(company);
   next();
 }

@@ -5,9 +5,9 @@ import rechargeSchema from "./rechargeSchema";
 import paymentPosSchema from "./paymentPosSchema";
 
 export {
-    createCardSchema,
-    activateCardSchema,
-    passwordSchema,
-    rechargeSchema,
-    paymentPosSchema
-}
+  createCardSchema,
+  activateCardSchema,
+  passwordSchema,
+  rechargeSchema,
+  paymentPosSchema,
+};

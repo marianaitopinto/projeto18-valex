@@ -23,12 +23,13 @@ export async function addPaymentPos(
   const business = await businessRepository.findById(businessId);
   if (!business) throw new AppError("The business is not registered", 401);
 
-  if (business.type !== cardData.type) throw new AppError("Type not authorized", 401);
+  if (business.type !== cardData.type)
+    throw new AppError("Type not authorized", 401);
 
   const recharges = await rechargeRepository.findByCardId(cardId);
   const payments = await paymentRepository.findByCardId(cardId);
   const balance = await cardUtil.getBalance(recharges, payments);
   if (balance < amount) throw new AppError("Insufficient funds ", 401);
 
-  await paymentRepository.insert({ cardId, businessId, amount})
+  await paymentRepository.insert({ cardId, businessId, amount });
 }
