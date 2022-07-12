@@ -2,6 +2,8 @@ import { AppError } from "../errors/appError";
 import dayjs from "dayjs";
 import Cryptr from "cryptr";
 
+import * as cardRepository from "../repositories/cardRepository"
+
 export function createCardName(name: string) {
   const nameArray = name.toUpperCase().split(" ");
   const cardName = [];
@@ -34,4 +36,11 @@ export function checkCvv(securityCode: string, cardData: any) {
     throw new AppError("Unauthorized", 401);
 
   return;
+}
+
+export async function checkCardExist(cardId: number) {
+    const cardData = await cardRepository.findById(cardId);
+    if (!cardData) throw new AppError("The card was not found", 404);
+
+    return cardData;
 }

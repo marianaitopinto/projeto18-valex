@@ -47,9 +47,8 @@ return card;
 }
 
 export async function activateCard(cardId: number, securityCode: string, password: string) {
-    const cardData = await cardRepository.findById(cardId);
-    if (!cardData) throw new AppError("The card was not found", 404);
-    
+    const cardData = await cardUtil.checkCardExist(cardId);
+
     //await cardUtil.checkIfCardIsExpired(cardData.expirationDate);
 
     if (cardData.password) throw new AppError("The card is already activate", 409);
@@ -61,5 +60,10 @@ export async function activateCard(cardId: number, securityCode: string, passwor
 
     await cardRepository.update(cardId, updateData);
     
+
+}
+
+export async function getBalanceCard(cardId: number) {
+    const cardData = await cardUtil.checkCardExist(cardId);
 
 }
