@@ -14,7 +14,7 @@ export async function addPaymentPos(
 
   if (!cardData.password) throw new AppError("The card is not activate", 409);
 
-  //VERIFICAR EXPIRAÇÃO!!!
+  await cardUtil.checkIfCardIsExpired(cardData.expirationDate);
 
   if (cardData.isBlocked) throw new AppError("The card is blocked", 401);
 

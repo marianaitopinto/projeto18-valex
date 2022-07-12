@@ -8,9 +8,8 @@ export async function rechargeCard(cardId: number, amount: number) {
     if (!cardData.password)
     throw new AppError("The card is not activate", 409);
 
-    //VERIFICAR SE ESTÁ EXPIRADO - ARRUMAR FUNÇÃO
+    await cardUtil.checkIfCardIsExpired(cardData.expirationDate);
 
     const recharge = { cardId, amount };
     await rechargeRepository.insert(recharge);
-    console.log('passei hein, amount')
 }

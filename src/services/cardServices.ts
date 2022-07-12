@@ -64,7 +64,7 @@ export async function activateCard(
 ) {
   const cardData = await cardUtil.checkCardExist(cardId);
 
-  //await cardUtil.checkIfCardIsExpired(cardData.expirationDate);
+  await cardUtil.checkIfCardIsExpired(cardData.expirationDate);
 
   if (cardData.password)
     throw new AppError("The card is already activate", 409);
@@ -94,7 +94,7 @@ export async function blockCard(cardId: number, password: string) {
   if (cardData.isBlocked)
     throw new AppError("The card is already blocked", 401);
 
-  //VERIFICAR SE ESTÁ EXPIRADO - ARRUMAR FUNÇÃO
+  await cardUtil.checkIfCardIsExpired(cardData.expirationDate);
 
   await cardUtil.checkPassword(password, cardData.password);
 
@@ -107,7 +107,7 @@ export async function unblockCard(cardId: number, password: string) {
   if (!cardData.isBlocked)
     throw new AppError("The card is already unblocked", 401);
 
-  //VERIFICAR SE ESTÁ EXPIRADO - ARRUMAR FUNÇÃO
+  await cardUtil.checkIfCardIsExpired(cardData.expirationDate);
 
   await cardUtil.checkPassword(password, cardData.password);
 

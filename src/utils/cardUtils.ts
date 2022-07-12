@@ -20,21 +20,20 @@ export function createCardName(name: string) {
   return cardName;
 }
 
-/*export function checkIfCardIsExpired(date: string) {
-  const dateFormat = date.split("/");
-  const isExpired = 
+export function checkIfCardIsExpired(date: string) {
+  const expire = dayjs(date, "MM/YY").isAfter(dayjs(Date.now()));
 
-  if (isExpired) throw new AppError("The card is expired", 403);
+  if (!expire) throw new AppError("The card is expired", 403);
 
   return;
-}*/
+}
 
 export function checkCvv(securityCode: string, cardData: any) {
   const cryptr = new Cryptr("myTotallySecretKey");
   console.log(securityCode);
   console.log(cryptr.decrypt(cardData.securityCode));
   if (securityCode !== cryptr.decrypt(cardData.securityCode))
-    throw new AppError("Unauthorized", 401);
+    throw new AppError("The card is expired", 401);
 
   return;
 }
@@ -67,7 +66,7 @@ export function checkPassword(password: string, encryptPassword: any) {
   console.log(password);
   console.log(encryptPassword);
   const check = bcrypt.compareSync(password, encryptPassword);
-  console.log(check);
+
   if (!check) throw new AppError("Unauthorized", 401);
 
   return;
