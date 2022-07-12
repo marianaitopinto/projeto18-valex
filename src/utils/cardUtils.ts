@@ -34,8 +34,7 @@ export function checkIfCardIsExpired(date: string) {
 
 export function checkCvv(securityCode: string, cardData: any) {
   const cryptr = new Cryptr("myTotallySecretKey");
-  console.log(securityCode);
-  console.log(cryptr.decrypt(cardData.securityCode));
+  
   if (securityCode !== cryptr.decrypt(cardData.securityCode))
     throw new AppError("cvv unauthorized", 401);
 
