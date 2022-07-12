@@ -7,6 +7,6 @@ const cardRouter = Router();
 
 cardRouter.post("/cards/create", validateApi, cardController.createCard);
 cardRouter.post("/cards/activate/:id", cardController.activateCard);
-cardRouter.get("/cards/transactions/:id", cardController.getTransactions);
+cardRouter.get("/cards/balance/:id", cardController.getBalance);
 
 export default cardRouter;

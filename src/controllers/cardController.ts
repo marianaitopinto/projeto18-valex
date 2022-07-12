@@ -21,7 +21,11 @@ export async function activateCard(req: Request, res: Response) {
     res.sendStatus(201);
 }
 
-export async function getTransactions(req: Request, res: Response) {
+export async function getBalance(req: Request, res: Response) {
     const { id } = req.params;
-    
+    const cardId = parseInt(id)
+
+    const balance = await cardService.getBalanceCard(cardId)
+
+    res.send(balance)
 }

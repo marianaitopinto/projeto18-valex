@@ -44,3 +44,20 @@ export async function checkCardExist(cardId: number) {
 
     return cardData;
 }
+
+export function getBalance(recharges: any, payments: any) {
+    let rechargesTotal = 0;
+    let paymentsTotal = 0;
+
+    recharges.map((recharge: any) => {
+        rechargesTotal += recharge.amount
+    })
+
+    payments.map((payment: any) => {
+        paymentsTotal += payment.amount
+    })
+
+    const balance = rechargesTotal - paymentsTotal
+    
+    return balance;
+}
