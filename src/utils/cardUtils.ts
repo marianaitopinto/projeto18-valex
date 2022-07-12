@@ -21,9 +21,13 @@ export function createCardName(name: string) {
 }
 
 export function checkIfCardIsExpired(date: string) {
-  const expire = dayjs(date, "MM/YY").isAfter(dayjs(Date.now()));
+  const dateFormat = date.split("/");
 
-  if (!expire) throw new AppError("The card is expired", 403);
+  const isExpired = dayjs(`${dateFormat[0]}/31/${dateFormat[1]}`).isBefore(
+    dayjs(Date.now())
+  );
+
+  if (isExpired) throw new AppError("The card is expired", 403);
 
   return;
 }
@@ -33,7 +37,7 @@ export function checkCvv(securityCode: string, cardData: any) {
   console.log(securityCode);
   console.log(cryptr.decrypt(cardData.securityCode));
   if (securityCode !== cryptr.decrypt(cardData.securityCode))
-    throw new AppError("The card is expired", 401);
+    throw new AppError("cvv unauthorized", 401);
 
   return;
 }
