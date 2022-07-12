@@ -7,17 +7,17 @@ import * as cardRepository from "../repositories/cardRepository";
 
 export function createCardName(name: string) {
   const nameArray = name.toUpperCase().split(" ");
-  const cardName = [];
+  let cardName: string = nameArray[0];
 
-  for (let i = 0; i <= nameArray.length; i++) {
-    if (i === nameArray.length - 1 || i === 0) {
-      cardName.push(nameArray[i]);
+  for (let i = 1; i < nameArray.length - 1; i++) {
+    if (nameArray[i].length >2) {
+      cardName += ` ${nameArray[i][0]}`
     }
-
-    //FIX-ME INSERIR OS NOMES DO MEIO
   }
 
-  return cardName.join(" ");
+  cardName += ` ${nameArray[nameArray.length -1]}`
+
+  return cardName;
 }
 
 /*export function checkIfCardIsExpired(date: string) {
